@@ -1785,6 +1785,15 @@ function onOnlineConnected(myColor){
   document.getElementById('modal-online').classList.remove('show');
   document.getElementById('modal-worldwide').classList.remove('show');
   document.getElementById('modal-reconnect').classList.remove('show');
+  if(window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.AdMob){
+    window.Capacitor.Plugins.AdMob.showBanner({
+      adId: 'ca-app-pub-3940256099942544/6300978111',
+      adSize: 'ADAPTIVE_BANNER',
+      position: 'BOTTOM_CENTER',
+      margin: 0,
+      isTesting: true,
+    });
+  }
   if(state && state.mode==='online' && !state.winner){
     // reconnecting mid-game: keep the current board, just resync
     setMsg(t('reconnect_success'));
@@ -2742,7 +2751,11 @@ document.getElementById('btn-start').addEventListener('click', ()=>{
     }
   });
 });
-document.getElementById('btn-quit').addEventListener('click', ()=> showScreen('screen-menu'));
+document.getElementById('btn-quit').addEventListener('click', ()=> {
+  if(window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.AdMob){
+    window.Capacitor.Plugins.AdMob.hideBanner();
+  }
+  showScreen('screen-menu');});
 document.getElementById('btn-replay').addEventListener('click', ()=>{
   document.getElementById('modal-end').classList.remove('show');
   newGame(state.mode, state.difficulty);
