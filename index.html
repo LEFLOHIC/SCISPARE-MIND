@@ -1879,12 +1879,12 @@ function onOnlineConnected(myColor){
   document.getElementById('modal-worldwide').classList.remove('show');
   document.getElementById('modal-reconnect').classList.remove('show');
   if(window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.AdMob){
-    window.Capacitor.Plugins.AdMob.showBanner({
-      adId: 'ca-app-pub-3940256099942544/6300978111',
+    window.Capacitor.Plugins.AdMob.initialize().catch(()=>{}); window.Capacitor.Plugins.AdMob.showBanner({
+      adId: 'ca-app-pub-5009994409310377/4590929739',
       adSize: 'ADAPTIVE_BANNER',
       position: 'BOTTOM_CENTER',
       margin: 0,
-      isTesting: true,
+      isTesting: false,
     });
   }
   if(state && state.mode==='online' && !state.winner){
